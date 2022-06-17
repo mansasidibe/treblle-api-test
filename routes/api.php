@@ -17,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::middleware(['treblle'])->group(function () {
+    // YOUR API ROUTES GO HERE
+    Route::prefix('samples')->group(function () {
+        Route::get('{uuid}', [SampleController::class, 'view']);
+        Route::post('store', [SampleController::class, 'store']);
+    });
+});
